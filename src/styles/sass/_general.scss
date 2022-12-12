@@ -1,0 +1,45 @@
+$transitionTime: 1s;
+@mixin InitAppContainer {
+  min-height: 100vh;
+  width: 100%;
+}
+
+@mixin minmax-Width($min, $max) {
+  min-width: $min;
+  max-width: $max;
+}
+@mixin minmax-Height($min, $max) {
+  min-height: #{$min};
+  max-height: #{$max};
+}
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  > #root {
+    display: flex;
+    @include InitAppContainer();
+    > #AppContainer {
+      @include InitAppContainer();
+      transition: background #{$transitionTime}, color #{$transitionTime};
+      &.LightMode {
+        background: #ffffff;
+      }
+      &.DarkMode {
+        background: #252525;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+h1,
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

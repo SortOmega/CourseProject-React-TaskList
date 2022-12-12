@@ -1,0 +1,233 @@
+@use "general";
+
+@mixin btnProperties {
+  outline: none;
+  font-weight: bold;
+  &.LightMode {
+    background: #5ed1ff;
+    border: 2pt outset #5ed1ff;
+    &:hover {
+      background: #3cff8a;
+      border: 2pt outset #3cff8a;
+    }
+  }
+  &.DarkMode {
+    background: #0081d7;
+    color: #ffffff;
+    border: 2pt outset #0081d7;
+    &:hover {
+      background: #00b247;
+      border: 2pt outset #00b247;
+    }
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin: 1rem 0;
+
+  h1 {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+
+  img {
+    width: 150px;
+    height: auto;
+    animation-name: Rotative-Content;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transition: filter 140ms;
+    &.LightMode:hover,
+    &.DarkMode:hover {
+      filter: drop-shadow(0 0 8px #00e8d188);
+    }
+    @keyframes Rotative-Content {
+      0% {
+        rotate: 0deg;
+      }
+      50% {
+        rotate: 100deg;
+      }
+      100% {
+        rotate: 0deg;
+      }
+    }
+  }
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.TasksContainer {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  grid-template-columns: min-content;
+  width: 100%;
+
+  .EmptyTaskList {
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 18pt;
+    display: inline-flex;
+    height: min-content;
+    padding: 5pt;
+    justify-content: center;
+    border-radius: 8pt;
+    &.LightMode {
+      background: #ff7171;
+    }
+    &.DarkMode {
+      background: #e84600;
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  width: min-content;
+  margin: 0 auto;
+  input {
+    font-weight: bold;
+  }
+
+  textarea {
+    @media screen and (min-width: 250px) {
+      @include general.minmax-Height(150pt, 200pt);
+      @include general.minmax-Width(250px, 400px);
+    }
+    @media screen and (min-width: 780px) {
+      @include general.minmax-Height(50pt, 100pt);
+      @include general.minmax-Width(500px, 600px);
+    }
+  }
+
+  button {
+    height: 40pt;
+    @include btnProperties();
+  }
+
+  input,
+  textarea {
+    padding: 5pt;
+    outline: none;
+    border: none;
+    &.LightMode {
+      background: #dedede;
+      border-bottom: 2pt solid #008be8;
+      &:focus {
+        border-bottom: 2pt solid #00b247;
+      }
+    }
+    &.DarkMode {
+      background: #4f4f4f;
+      color: #ffffff;
+      border-bottom: 2pt solid #5ed1ff;
+      &::placeholder {
+        color: #e0e0e0;
+      }
+      &:focus {
+        border-bottom: 2pt solid #3cff8a;
+      }
+    }
+  }
+
+  input,
+  textarea,
+  button {
+    margin: 4pt 0;
+    font-size: 11pt;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5pt;
+    transition: color #{general.$transitionTime},
+      background #{general.$transitionTime}, border #{general.$transitionTime};
+  }
+}
+
+.TaskListBox {
+  display: flex;
+  justify-content: space-evenly;
+  width: 95vw;
+  flex-wrap: wrap;
+
+  > .TaskCard {
+    border-radius: 14pt;
+    background: linear-gradient(
+      30deg,
+      #dbdbdb,
+      #e2e2e2,
+      #eaeaea,
+      #e3e3e3,
+      #909090,
+      #363636,
+      #393939,
+      #343434,
+      #3f3f3f,
+      #353535
+    );
+    background-size: 1300%;
+    padding: 12pt;
+    display: grid;
+    grid-template-rows: minmax(min-content, 65pt) 1fr 40pt;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background #{general.$transitionTime};
+    align-items: center;
+
+    &.LightMode {
+      background-position: 0%;
+    }
+
+    &.DarkMode {
+      background-position: 95%;
+    }
+
+    @media screen and (min-width: 250px) {
+      width: 70%;
+      @include general.minmax-Height(260px, 700px);
+      margin: 5pt;
+    }
+
+    @media screen and (min-width: 700px) {
+      width: 320px;
+      @include general.minmax-Height(320px, 450px);
+      margin: 15pt;
+    }
+
+    h4 {
+      font-family: "Montserrat";
+      font-size: 1.2em;
+    }
+
+    p {
+      align-self: flex-start;
+      display: inline-block;
+    }
+
+    button {
+      align-self: flex-end;
+      border-radius: 8pt;
+      height: 44px;
+      transition: color #{general.$transitionTime},
+        background #{general.$transitionTime}, border #{general.$transitionTime};
+      @include btnProperties();
+    }
+
+    h4,
+    p {
+      margin: 6pt;
+    }
+
+    h4,
+    p,
+    button {
+      word-break: break-word;
+    }
+  }
+}

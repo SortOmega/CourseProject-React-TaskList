@@ -1,0 +1,265 @@
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+}
+body > #root {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+body > #root > #AppContainer {
+  min-height: 100vh;
+  width: 100%;
+  transition: background 1s, color 1s;
+}
+body > #root > #AppContainer.LightMode {
+  background: #ffffff;
+}
+body > #root > #AppContainer.DarkMode {
+  background: #252525;
+  color: #ffffff;
+}
+
+h1,
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin: 1rem 0;
+}
+header h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+header img {
+  width: 150px;
+  height: auto;
+  animation-name: Rotative-Content;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition: filter 140ms;
+}
+header img.LightMode:hover, header img.DarkMode:hover {
+  filter: drop-shadow(0 0 8px rgba(0, 232, 209, 0.5333333333));
+}
+@keyframes Rotative-Content {
+  0% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 100deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.TasksContainer {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  grid-template-columns: min-content;
+  width: 100%;
+}
+.TasksContainer .EmptyTaskList {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 18pt;
+  display: inline-flex;
+  height: min-content;
+  padding: 5pt;
+  justify-content: center;
+  border-radius: 8pt;
+}
+.TasksContainer .EmptyTaskList.LightMode {
+  background: #ff7171;
+}
+.TasksContainer .EmptyTaskList.DarkMode {
+  background: #e84600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  width: min-content;
+  margin: 0 auto;
+}
+form input {
+  font-weight: bold;
+}
+@media screen and (min-width: 250px) {
+  form textarea {
+    min-height: 150pt;
+    max-height: 200pt;
+    min-width: 250px;
+    max-width: 400px;
+  }
+}
+@media screen and (min-width: 780px) {
+  form textarea {
+    min-height: 50pt;
+    max-height: 100pt;
+    min-width: 500px;
+    max-width: 600px;
+  }
+}
+form button {
+  height: 40pt;
+  outline: none;
+  font-weight: bold;
+}
+form button.LightMode {
+  background: #5ed1ff;
+  border: 2pt outset #5ed1ff;
+}
+form button.LightMode:hover {
+  background: #3cff8a;
+  border: 2pt outset #3cff8a;
+}
+form button.DarkMode {
+  background: #0081d7;
+  color: #ffffff;
+  border: 2pt outset #0081d7;
+}
+form button.DarkMode:hover {
+  background: #00b247;
+  border: 2pt outset #00b247;
+}
+form input,
+form textarea {
+  padding: 5pt;
+  outline: none;
+  border: none;
+}
+form input.LightMode,
+form textarea.LightMode {
+  background: #dedede;
+  border-bottom: 2pt solid #008be8;
+}
+form input.LightMode:focus,
+form textarea.LightMode:focus {
+  border-bottom: 2pt solid #00b247;
+}
+form input.DarkMode,
+form textarea.DarkMode {
+  background: #4f4f4f;
+  color: #ffffff;
+  border-bottom: 2pt solid #5ed1ff;
+}
+form input.DarkMode::placeholder,
+form textarea.DarkMode::placeholder {
+  color: #e0e0e0;
+}
+form input.DarkMode:focus,
+form textarea.DarkMode:focus {
+  border-bottom: 2pt solid #3cff8a;
+}
+form input,
+form textarea,
+form button {
+  margin: 4pt 0;
+  font-size: 11pt;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5pt;
+  transition: color 1s, background 1s, border 1s;
+}
+
+.TaskListBox {
+  display: flex;
+  justify-content: space-evenly;
+  width: 95vw;
+  flex-wrap: wrap;
+}
+.TaskListBox > .TaskCard {
+  border-radius: 14pt;
+  background: linear-gradient(30deg, #dbdbdb, #e2e2e2, #eaeaea, #e3e3e3, #909090, #363636, #393939, #343434, #3f3f3f, #353535);
+  background-size: 1300%;
+  padding: 12pt;
+  display: grid;
+  grid-template-rows: minmax(min-content, 65pt) 1fr 40pt;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background 1s;
+  align-items: center;
+}
+.TaskListBox > .TaskCard.LightMode {
+  background-position: 0%;
+}
+.TaskListBox > .TaskCard.DarkMode {
+  background-position: 95%;
+}
+@media screen and (min-width: 250px) {
+  .TaskListBox > .TaskCard {
+    width: 70%;
+    min-height: 260px;
+    max-height: 700px;
+    margin: 5pt;
+  }
+}
+@media screen and (min-width: 700px) {
+  .TaskListBox > .TaskCard {
+    width: 320px;
+    min-height: 320px;
+    max-height: 450px;
+    margin: 15pt;
+  }
+}
+.TaskListBox > .TaskCard h4 {
+  font-family: "Montserrat";
+  font-size: 1.2em;
+}
+.TaskListBox > .TaskCard p {
+  align-self: flex-start;
+  display: inline-block;
+}
+.TaskListBox > .TaskCard button {
+  align-self: flex-end;
+  border-radius: 8pt;
+  height: 44px;
+  transition: color 1s, background 1s, border 1s;
+  outline: none;
+  font-weight: bold;
+}
+.TaskListBox > .TaskCard button.LightMode {
+  background: #5ed1ff;
+  border: 2pt outset #5ed1ff;
+}
+.TaskListBox > .TaskCard button.LightMode:hover {
+  background: #3cff8a;
+  border: 2pt outset #3cff8a;
+}
+.TaskListBox > .TaskCard button.DarkMode {
+  background: #0081d7;
+  color: #ffffff;
+  border: 2pt outset #0081d7;
+}
+.TaskListBox > .TaskCard button.DarkMode:hover {
+  background: #00b247;
+  border: 2pt outset #00b247;
+}
+.TaskListBox > .TaskCard h4,
+.TaskListBox > .TaskCard p {
+  margin: 6pt;
+}
+.TaskListBox > .TaskCard h4,
+.TaskListBox > .TaskCard p,
+.TaskListBox > .TaskCard button {
+  word-break: break-word;
+}
+
+/*# sourceMappingURL=index.css.map */
