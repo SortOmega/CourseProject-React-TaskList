@@ -16,3 +16,12 @@ export type TaskListProps = {
 export type TaskCardProps = {
   task: taskType;
 };
+
+export type firebaseConfigType = {
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+  storageBucket: string;
+  messagingSenderId: string;
+  appId: string;
+};
