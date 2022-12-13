@@ -1,8 +1,7 @@
 import React from "react";
-import { tasks as tareas } from "../data/tasks";
 import { ReactChildren, taskType } from "../types";
-import { FireDBCollection, FireDBQueryTasks } from "../data/FirebaseDB";
-import { addDoc, onSnapshot } from "firebase/firestore";
+import { FireDB, FireDBCollection, FireDBQueryTasks } from "../data/FirebaseDB";
+import { addDoc, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 
 // requerido en typescript --ESTABLECER TIPADO PARA LOS CONTEXT
 type ThemeMode = "LightMode" | "DarkMode";
@@ -13,7 +12,7 @@ type TaskContextType = {
     setTheme: React.Dispatch<React.SetStateAction<ThemeMode>>;
   };
   createTask(title: string, description: string): void;
-  deleteTask(id: string): void;
+  deleteTask(id: string, title: string): void;
 };
 
 //requerido en typescript --CREAR EL CONTEXT CON SUS RESPECTIVOS VALORES A EXPORTAR
@@ -32,8 +31,7 @@ export function TaskContextProvider({ children }: ReactChildren) {
       title: taskTitle,
       description: taskDescription,
     });
-
-    console.log("se ha agregado una nueva tarea");
+    //console.log("se ha agregado una nueva tarea");
     return;
   }
   // FUNCION PARA OBTENER TAREAS DE TASKLIST
@@ -56,12 +54,11 @@ export function TaskContextProvider({ children }: ReactChildren) {
   }
 
   // FUNCION PARA ELIMINAR TAREAS DEL TASKLIST
-  function deleteTask(taskID: string) {
-    //Filtra el array, todos los objetos que cumplan el filtro (sean verdaderos), se mantienen!
-    //setTasks(tasks.filter((tareita) => tareita.id !== taskID));
-    // Borrar tarea mediante firebase
-    /*console.log(tasks);
-    console.log(taskID);//*/
+  async function deleteTask(taskID: string, taskTitle: string) {
+    if (window.confirm(`Estas seguro de borrar la tarea "${taskTitle}"?`)) {
+      const DocToDelete = doc(FireDBCollection, taskID);
+      await deleteDoc(DocToDelete);
+    }
   }
 
   React.useEffect(() => {

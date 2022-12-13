@@ -9,7 +9,9 @@ function TaskCard({ task }: TaskCardProps) {
     <div className={`TaskCard ${Theme.getTheme}`}>
       <h4>{task.title}</h4>
       <p>{task.description}</p>
-      <button className={Theme.getTheme} onClick={() => deleteTask(task.id)}>
+      <button
+        className={Theme.getTheme}
+        onClick={() => deleteTask(task.id, task.title)}>
         Eliminar Tarea
       </button>
     </div>
