@@ -1,12 +1,13 @@
 import React from "react";
 import { taskType } from "../types";
 import { TaskContext } from "../Context/TaskContext";
+import { uuidv4 } from "@firebase/util";
 
 function TaskForm() {
   const { createTask, Theme } = React.useContext(TaskContext);
 
-  const TaskInitValues: taskType = { title: "", description: "" };
-  const [taskValues, setTaskValues] = React.useState<taskType>(TaskInitValues);
+  const TaskInitValues = { title: "", description: "" };
+  const [taskValues, setTaskValues] = React.useState(TaskInitValues);
 
   const handleOnChange = (evento: React.ChangeEvent) => {
     const { name, value } = evento.target as
@@ -23,7 +24,9 @@ function TaskForm() {
       alert("No has Agregado un Título o una descripción a la tarea!");
       return;
     }
-    createTask(taskValues.title, taskValues.description);
+    const id = uuidv4();
+
+    createTask(id, taskValues.title, taskValues.description);
     setTaskValues({ title: "", description: "" });
   };
 

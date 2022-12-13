@@ -1,5 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import {
+  collection,
+  getFirestore,
+  collectionGroup,
+  enableIndexedDbPersistence,
+} from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,6 +19,13 @@ const firebaseConfig = {
   messagingSenderId: "726232439326",
   appId: "1:726232439326:web:07854ba6e4b81d04c62c0f",
 };
-
 // Initialize Firebase
-const firebaseDB = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+export const FireDB = getFirestore(app);
+
+enableIndexedDbPersistence(FireDB);
+
+export const FireDBCollection = collection(FireDB, "TaskList");
+
+export const FireDBQueryTasks = collectionGroup(FireDB, "TaskList");
