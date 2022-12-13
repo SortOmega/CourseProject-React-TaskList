@@ -20,7 +20,7 @@ Web app for creating and deleting tasks from a Task List, mainly using the React
 - ✅ react-dom
 - ✅ firebase
 
-# Dependencias de Desarrollo Usados / Dev-Dependencies Used
+### Dependencias de Desarrollo Usados / Dev-Dependencies Used
 
 - ✅ typescript
 - ✅ sass
