@@ -1,8 +1,8 @@
 import React from "react";
 import { tasks as tareas } from "../data/tasks";
 import { ReactChildren, taskType } from "../types";
-import { FireDB, FireDBCollection, FireDBQueryTasks } from "../data/FirebaseDB";
-import { addDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { FireDBCollection, FireDBQueryTasks } from "../data/FirebaseDB";
+import { addDoc, onSnapshot } from "firebase/firestore";
 
 // requerido en typescript --ESTABLECER TIPADO PARA LOS CONTEXT
 type ThemeMode = "LightMode" | "DarkMode";
@@ -12,15 +12,14 @@ type TaskContextType = {
     getTheme: ThemeMode;
     setTheme: React.Dispatch<React.SetStateAction<ThemeMode>>;
   };
-  createTask(id: string, title: string, description: string): void;
-  getTasks(): Promise<void>;
+  createTask(title: string, description: string): void;
   deleteTask(id: string): void;
 };
 
 //requerido en typescript --CREAR EL CONTEXT CON SUS RESPECTIVOS VALORES A EXPORTAR
 export const TaskContext = React.createContext<TaskContextType>(null!);
 
-//DECLARAR EL ELEMENTO CONTEXT JSX
+//DECLARAR EL ELEMENTO CONTEXT JSX --------------------------------------------------------------------------
 export function TaskContextProvider({ children }: ReactChildren) {
   const [tasks, setTasks] = React.useState<taskType[]>([]);
   const [theme, setTheme] = React.useState<ThemeMode>("LightMode");
@@ -28,13 +27,8 @@ export function TaskContextProvider({ children }: ReactChildren) {
   const Theme = { getTheme: theme, setTheme };
 
   // FUNCION PARA AGREGAR TAREAS AL TASKLIST
-  async function createTask(
-    taskID: string,
-    taskTitle: string,
-    taskDescription: string
-  ) {
+  async function createTask(taskTitle: string, taskDescription: string) {
     await addDoc(FireDBCollection, {
-      id: taskID,
       title: taskTitle,
       description: taskDescription,
     });
@@ -44,10 +38,19 @@ export function TaskContextProvider({ children }: ReactChildren) {
   }
   // FUNCION PARA OBTENER TAREAS DE TASKLIST
   async function getTasks() {
-    const querySnapshot = await getDocs(FireDBQueryTasks);
-    const FireDBUnsuscribe = onSnapshot(FireDBQueryTasks, () => {
-      querySnapshot.forEach((element) => {
-        console.log(element.data());
+    onSnapshot(FireDBQueryTasks, (querySnapshot) => {
+      const TaskDocs: taskType[] = [];
+      querySnapshot.forEach((fireDoc) => {
+        //console.log(fireDoc.data());
+        const Doc: { title: string; description: string } = fireDoc.data() as {
+          title: string;
+          description: string;
+        };
+        TaskDocs.push({
+          id: fireDoc.id,
+          ...Doc,
+        });
+        setTasks(TaskDocs);
       }); //*/
     });
   }
@@ -62,7 +65,6 @@ export function TaskContextProvider({ children }: ReactChildren) {
   }
 
   React.useEffect(() => {
-    //setTasks(tareas);
     getTasks();
   }, []);
 
@@ -71,7 +73,6 @@ export function TaskContextProvider({ children }: ReactChildren) {
     tasks,
     Theme,
     createTask,
-    getTasks,
     deleteTask,
   };
   return (

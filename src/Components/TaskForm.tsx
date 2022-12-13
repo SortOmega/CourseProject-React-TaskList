@@ -7,27 +7,27 @@ function TaskForm() {
   const { createTask, Theme } = React.useContext(TaskContext);
 
   const TaskInitValues = { title: "", description: "" };
-  const [taskValues, setTaskValues] = React.useState(TaskInitValues);
+  const [taskFormValues, setTaskFormValues] = React.useState(TaskInitValues);
 
   const handleOnChange = (evento: React.ChangeEvent) => {
     const { name, value } = evento.target as
       | HTMLInputElement
       | HTMLTextAreaElement;
 
-    setTaskValues({ ...taskValues, [name]: value });
+    setTaskFormValues({ ...taskFormValues, [name]: value });
   };
 
   const handleSubmit = (evento: React.FormEvent) => {
     evento.preventDefault();
 
-    if (taskValues.title == "" || taskValues.description == "") {
+    if (taskFormValues.title == "" || taskFormValues.description == "") {
       alert("No has Agregado un Título o una descripción a la tarea!");
       return;
     }
     const id = uuidv4();
 
-    createTask(id, taskValues.title, taskValues.description);
-    setTaskValues({ title: "", description: "" });
+    createTask(taskFormValues.title, taskFormValues.description);
+    setTaskFormValues({ title: "", description: "" });
   };
 
   return (
@@ -39,7 +39,7 @@ function TaskForm() {
         placeholder='Escribe tu tarea...'
         onChange={handleOnChange}
         maxLength={40}
-        value={taskValues.title}
+        value={taskFormValues.title}
         autoFocus
       />
       <textarea
@@ -48,7 +48,7 @@ function TaskForm() {
         placeholder='Escriba la descripcion de la tarea...'
         onChange={handleOnChange}
         maxLength={320}
-        value={taskValues.description}></textarea>
+        value={taskFormValues.description}></textarea>
       <button className={Theme.getTheme}>Guardar</button>
     </form>
   );
