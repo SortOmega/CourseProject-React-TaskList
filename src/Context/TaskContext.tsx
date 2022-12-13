@@ -15,21 +15,7 @@ type TaskContextType = {
 };
 
 //requerido en typescript --CREAR EL CONTEXT CON SUS RESPECTIVOS VALORES A EXPORTAR
-export const TaskContext = React.createContext<TaskContextType>({
-  tasks: [],
-  createTask: function (title: string, description: string): void {
-    throw new Error("Function not implemented.");
-  },
-  deleteTask: function (id: number): void {
-    throw new Error("Function not implemented.");
-  },
-  Theme: {
-    getTheme: "LightMode",
-    setTheme: function (value: React.SetStateAction<ThemeMode>): void {
-      throw new Error("Function not implemented.");
-    },
-  },
-});
+export const TaskContext = React.createContext<TaskContextType>(null!);
 
 //DECLARAR EL ELEMENTO CONTEXT JSX
 export function TaskContextProvider({ children }: ReactChildren) {
@@ -40,7 +26,6 @@ export function TaskContextProvider({ children }: ReactChildren) {
 
   function createTask(taskTitle: string, taskDescription: string) {
     const newTask: taskType = {
-      id: tasks.length,
       title: taskTitle,
       description: taskDescription,
     };
@@ -50,7 +35,8 @@ export function TaskContextProvider({ children }: ReactChildren) {
 
   function deleteTask(taskID: number) {
     //Filtra el array, todos los objetos que cumplan el filtro (sean verdaderos), se mantienen!
-    setTasks(tasks.filter((tareita) => tareita.id !== taskID));
+    //setTasks(tasks.filter((tareita) => tareita.id !== taskID));
+    // Borrar tarea mediante firebase
     /*console.log(tasks);
     console.log(taskID);//*/
   }
