@@ -1,4 +1,4 @@
-@use "general";
+@use 'general';
 
 @mixin btnProperties {
   outline: none;
@@ -30,10 +30,10 @@ header {
   margin: 1rem 0;
 
   h1 {
-    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 
-  img {
+  > img {
     width: 150px;
     height: auto;
     animation-name: Rotative-Content;
@@ -57,6 +57,62 @@ header {
       }
     }
   }
+
+  #GoogleIdentityBTN,
+  #GoogleIdentitySignOut {
+    margin-top: 20pt;
+    height: 40px;
+  }
+
+  #GoogleIdentitySignOut {
+    $time: 1.4s;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    border-radius: 20px/50%;
+    width: 258px;
+    align-items: center;
+    cursor: pointer;
+    transition: border $time, background $time, color $time;
+
+    > .GUserIMG,
+    > .GLogo {
+      $imgSize: 32px;
+      display: flex;
+      align-items: center;
+      height: $imgSize;
+      width: $imgSize;
+      position: relative;
+      > img {
+        border-radius: 100%;
+        height: $imgSize;
+        width: $imgSize;
+      }
+    }
+    > .GUserIMG {
+      left: -2px;
+    }
+    > .GUserDesc {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      > span {
+        display: inline-block;
+        width: 100%;
+        &:nth-child(2) {
+          font-size: 9pt;
+        }
+      }
+    }
+    > .GLogo {
+      justify-content: center;
+      right: -8px;
+      > img {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
 }
 
 main {
@@ -72,7 +128,7 @@ main {
   width: 100%;
 
   .EmptyTaskList {
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 18pt;
     display: inline-flex;
     height: min-content;
@@ -201,7 +257,7 @@ form {
     }
 
     h4 {
-      font-family: "Montserrat";
+      font-family: 'Montserrat';
       font-size: 1.2em;
     }
 
@@ -228,6 +284,31 @@ form {
     p,
     button {
       word-break: break-word;
+    }
+  }
+}
+
+.LightMode {
+  header {
+    #GoogleIdentitySignOut {
+      background: #fff;
+      border: 1px solid #dadce0;
+      span:nth-child(2) {
+        color: #0071bc;
+      }
+    }
+  }
+}
+.DarkMode {
+  header {
+    #GoogleIdentitySignOut {
+      color: #fff;
+      background: #2a2a2a;
+      border: 1px solid #6b6b6b;
+
+      span:nth-child(2) {
+        color: #36afff;
+      }
     }
   }
 }

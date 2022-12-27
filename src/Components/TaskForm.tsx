@@ -1,12 +1,12 @@
-import React from "react";
-import { taskType } from "../types";
-import { TaskContext } from "../Context/TaskContext";
-import { uuidv4 } from "@firebase/util";
+import React from 'react';
+import { taskType } from '../types';
+import { TaskContext } from '../Context/TaskContext';
+import { uuidv4 } from '@firebase/util';
 
 function TaskForm() {
   const { createTask, Theme } = React.useContext(TaskContext);
 
-  const TaskInitValues = { title: "", description: "" };
+  const TaskInitValues = { title: '', description: '' };
   const [taskFormValues, setTaskFormValues] = React.useState(TaskInitValues);
 
   const handleOnChange = (evento: React.ChangeEvent) => {
@@ -20,14 +20,14 @@ function TaskForm() {
   const handleSubmit = (evento: React.FormEvent) => {
     evento.preventDefault();
 
-    if (taskFormValues.title == "" || taskFormValues.description == "") {
-      alert("No has Agregado un Título o una descripción a la tarea!");
+    if (taskFormValues.title == '' || taskFormValues.description == '') {
+      alert('No has Agregado un Título o una descripción a la tarea!');
       return;
     }
     const id = uuidv4();
 
     createTask(taskFormValues.title, taskFormValues.description);
-    setTaskFormValues({ title: "", description: "" });
+    setTaskFormValues({ title: '', description: '' });
   };
 
   return (
@@ -35,7 +35,7 @@ function TaskForm() {
       <input
         name='title'
         type='text'
-        className={Theme.getTheme}
+        className={Theme.get}
         placeholder='Escribe tu tarea...'
         onChange={handleOnChange}
         maxLength={40}
@@ -44,12 +44,12 @@ function TaskForm() {
       />
       <textarea
         name='description'
-        className={Theme.getTheme}
+        className={Theme.get}
         placeholder='Escriba la descripcion de la tarea...'
         onChange={handleOnChange}
         maxLength={320}
         value={taskFormValues.description}></textarea>
-      <button className={Theme.getTheme}>Guardar</button>
+      <button className={Theme.get}>Guardar</button>
     </form>
   );
 }

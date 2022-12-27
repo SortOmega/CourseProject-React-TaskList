@@ -25,3 +25,21 @@ export type firebaseConfigType = {
   messagingSenderId: string;
   appId: string;
 };
+
+// ---------- Google Auth Object Type ------------- //
+
+type GoogleAuthObject = {
+  iss: string;
+  nbf: number;
+  aud: string;
+  sub: string;
+  email: string;
+  email_verified: boolean;
+  azp: string;
+  name: string;
+  picture: string;
+  given_name: string;
+  iat: number;
+  exp: number;
+  jti: string;
+};

@@ -43,7 +43,7 @@ header {
 header h1 {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-header img {
+header > img {
   width: 150px;
   height: auto;
   animation-name: Rotative-Content;
@@ -52,7 +52,7 @@ header img {
   animation-direction: alternate;
   transition: filter 140ms;
 }
-header img.LightMode:hover, header img.DarkMode:hover {
+header > img.LightMode:hover, header > img.DarkMode:hover {
   filter: drop-shadow(0 0 8px rgba(0, 232, 209, 0.5333333333));
 }
 @keyframes Rotative-Content {
@@ -65,6 +65,58 @@ header img.LightMode:hover, header img.DarkMode:hover {
   100% {
     rotate: 0deg;
   }
+}
+header #GoogleIdentityBTN,
+header #GoogleIdentitySignOut {
+  margin-top: 20pt;
+  height: 40px;
+}
+header #GoogleIdentitySignOut {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  border-radius: 20px/50%;
+  width: 258px;
+  align-items: center;
+  cursor: pointer;
+  transition: border 1.4s, background 1.4s, color 1.4s;
+}
+header #GoogleIdentitySignOut > .GUserIMG,
+header #GoogleIdentitySignOut > .GLogo {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  position: relative;
+}
+header #GoogleIdentitySignOut > .GUserIMG > img,
+header #GoogleIdentitySignOut > .GLogo > img {
+  border-radius: 100%;
+  height: 32px;
+  width: 32px;
+}
+header #GoogleIdentitySignOut > .GUserIMG {
+  left: -2px;
+}
+header #GoogleIdentitySignOut > .GUserDesc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+header #GoogleIdentitySignOut > .GUserDesc > span {
+  display: inline-block;
+  width: 100%;
+}
+header #GoogleIdentitySignOut > .GUserDesc > span:nth-child(2) {
+  font-size: 9pt;
+}
+header #GoogleIdentitySignOut > .GLogo {
+  justify-content: center;
+  right: -8px;
+}
+header #GoogleIdentitySignOut > .GLogo > img {
+  width: 25px;
+  height: 25px;
 }
 
 main {
@@ -262,6 +314,23 @@ form button {
 .TaskListBox > .TaskCard p,
 .TaskListBox > .TaskCard button {
   word-break: break-word;
+}
+
+.LightMode header #GoogleIdentitySignOut {
+  background: #fff;
+  border: 1px solid #dadce0;
+}
+.LightMode header #GoogleIdentitySignOut span:nth-child(2) {
+  color: #0071bc;
+}
+
+.DarkMode header #GoogleIdentitySignOut {
+  color: #fff;
+  background: #2a2a2a;
+  border: 1px solid #6b6b6b;
+}
+.DarkMode header #GoogleIdentitySignOut span:nth-child(2) {
+  color: #36afff;
 }
 
 /*# sourceMappingURL=index.css.map */

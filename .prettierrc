@@ -1,0 +1,7 @@
+{
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "quoteProps": "preserve",
+  "jsxSingleQuote": true,
+  "bracketSameLine": true
+}
