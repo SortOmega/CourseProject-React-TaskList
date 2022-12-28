@@ -1,6 +1,6 @@
 import React from 'react';
 import { TaskContext } from '../Context/TaskContext';
-import { createTask } from '../data/TasksFunctions';
+import { createTask, getGoogleUser } from '../data/TasksFunctions';
 
 function TaskForm() {
   // ----------------- INICIALIZANDO LOS HOOKS ----------------- //
@@ -24,14 +24,22 @@ function TaskForm() {
       alert('No Has Iniciado Sesion con tu cuenta de Google!');
       return;
     }
+    if (!getGoogleUser(GoogleUser.get?.sub as string)) {
+      alert('No Has Iniciado Sesion con tu cuenta de Google!');
+      return;
+    }
 
     if (taskFormValues.title == '' || taskFormValues.description == '') {
       alert('No has Agregado un Título o una descripción a la tarea!');
       return;
     }
 
-    createTask(taskFormValues.title, taskFormValues.description);
-    setTaskFormValues({ title: '', description: '' });
+    createTask(
+      [GoogleUser.get.email],
+      taskFormValues.title,
+      taskFormValues.description
+    );
+    setTaskFormValues({ title: '', description: '' }); //*/
   };
 
   // ----------------- RETURN COMPONENTS ----------------- //

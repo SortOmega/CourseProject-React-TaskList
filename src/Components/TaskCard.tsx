@@ -1,9 +1,10 @@
 import React from 'react';
 import { TaskContext } from '../Context/TaskContext';
 import { TaskCardProps } from '../types';
+import { deleteTask } from '../data/TasksFunctions';
 
 function TaskCard({ task }: TaskCardProps) {
-  const { deleteTask, Theme } = React.useContext(TaskContext);
+  const { Theme } = React.useContext(TaskContext);
 
   return (
     <div className={`TaskCard ${Theme.get}`}>

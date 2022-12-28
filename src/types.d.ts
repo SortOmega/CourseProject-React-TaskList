@@ -2,7 +2,12 @@ export type ReactChildren = {
   children: React.ReactNode;
 };
 
-export type taskType = { id: string; title: string; description: string };
+export type taskType = {
+  id: string;
+  emails: string[];
+  title: string;
+  description: string;
+};
 
 export type TaskFormProps = {
   createTask(taskTitle: string, taskDescription: string): void;

@@ -24,12 +24,22 @@ export async function newGoogleUser(subId: string, email: string) {
 }
 
 export function getGoogleUser(subId: string) {
-  return doc(FireDB, GoogleCollectionName, subId);
+  try {
+    doc(FireDB, GoogleCollectionName, subId);
+    return true;
+  } catch (_error) {
+    return false;
+  }
 }
 // --------------------------- FUNCIONES PARA COLECCION DE TASKLIST --------------------------- //
 // FUNCION PARA AGREGAR TAREAS DEL TASKLIST
-export async function createTask(taskTitle: string, taskDescription: string) {
+export async function createTask(
+  emails: string[],
+  taskTitle: string,
+  taskDescription: string
+) {
   await addDoc(FireDB_TaskListCollection, {
+    emails,
     title: taskTitle,
     description: taskDescription,
   });
@@ -46,20 +56,26 @@ export async function deleteTask(taskID: string, taskTitle: string) {
 }
 
 export async function getTasks(
+  Gemail: string,
   setTasks: React.Dispatch<React.SetStateAction<taskType[]>>
 ) {
   onSnapshot(FireDB_TaskListQuery, (querySnapshot) => {
     const TaskDocs: taskType[] = [];
     querySnapshot.forEach((fireDoc) => {
       //console.log(fireDoc.data());
-      const Doc: { title: string; description: string } = fireDoc.data() as {
-        title: string;
-        description: string;
-      };
-      TaskDocs.push({
-        id: fireDoc.id,
-        ...Doc,
-      });
+      const Doc: { emails: string[]; title: string; description: string } =
+        fireDoc.data() as {
+          emails: string[];
+          title: string;
+          description: string;
+        };
+
+      if (Doc.emails.some((email) => email === Gemail)) {
+        TaskDocs.push({
+          id: fireDoc.id,
+          ...Doc,
+        });
+      }
       setTasks(TaskDocs);
     }); //*/
   });

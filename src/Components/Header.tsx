@@ -4,7 +4,7 @@ import ReactIcon from '../assets/react.svg';
 
 function Header() {
   // ------- INICIALIZACION DE HOOKS ------- //
-  const { Theme, GoogleUser } = useContext(TaskContext);
+  const { Theme, GoogleUser, Tasks } = useContext(TaskContext);
   const [imgProfile, setImgProfile] = useState(
     'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
   );
@@ -28,6 +28,7 @@ function Header() {
       GoogleUser.set(undefined);
       (document.getElementById('GoogleIdentityBTN') as HTMLElement).hidden =
         false;
+      Tasks.set([]);
     }
   };
   // ------- RETURN COMPONENT ------- //

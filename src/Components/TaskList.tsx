@@ -1,12 +1,18 @@
-import React from 'react';
+import { useContext, useEffect } from 'react';
 import { taskType } from '../types';
 import TaskCard from './TaskCard';
 import { TaskContext } from '../Context/TaskContext';
+import { getTasks } from '../data/TasksFunctions';
 
 function TaskList() {
   // ----------------- INICIALIZANDO LOS HOOKS ----------------- //
-  const { Tasks, Theme } = React.useContext(TaskContext);
+  const { Tasks, Theme, GoogleUser } = useContext(TaskContext);
 
+  useEffect(() => {
+    if (GoogleUser.get !== undefined) {
+      getTasks(GoogleUser.get.email, Tasks.set);
+    }
+  }, [GoogleUser.get]);
   // ------------ RETURN COMPONENTS ------------ //
   if (Tasks.get.length === 0)
     return (
