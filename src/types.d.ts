@@ -33,7 +33,15 @@ export type firebaseConfigType = {
 
 // ---------- Google Auth Object Type ------------- //
 
-type GoogleAuthObject = {
+export type GoogleUserType = {
+  sub: string;
+  email: string;
+  email_verified: boolean;
+  name: string;
+  picture: string;
+  given_name: string;
+};
+export type GoogleAuthObject = {
   iss: string;
   nbf: number;
   aud: string;
