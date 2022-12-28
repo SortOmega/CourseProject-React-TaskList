@@ -1,7 +1,6 @@
 import { MouseEvent, useContext, useState, useEffect } from 'react';
 import { TaskContext } from '../Context/TaskContext';
 import ReactIcon from '../assets/react.svg';
-import axios from 'axios';
 
 function Header() {
   // ------- INICIALIZACION DE HOOKS ------- //
@@ -22,23 +21,6 @@ function Header() {
           'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
         )
       : setImgProfile(src);
-
-    try {
-      let headersList = {
-        'Accept': '*/*',
-      };
-
-      let reqOptions = {
-        url: imgProfile,
-        method: 'GET',
-        headers: headersList,
-      };
-
-      let response = await axios.request(reqOptions);
-      console.log(response.data);
-    } catch (error) {
-      console.warn("Couldn't fetch Profile Image: \n" + error);
-    }
   }; //*/
 
   const handleSignOut = (_evento: MouseEvent) => {

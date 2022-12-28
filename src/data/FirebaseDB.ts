@@ -21,6 +21,12 @@ export const FireDB = getFirestore(app);
 
 enableIndexedDbPersistence(FireDB);
 
-export const FireDBCollection = collection(FireDB, 'TaskList');
+// --------- Google User Collection --------- //
+export const GoogleCollectionName = 'GoogleUsers';
+export const FireDB_GUserCollection = collection(FireDB, GoogleCollectionName);
 
-export const FireDBQueryTasks = collectionGroup(FireDB, 'TaskList');
+export const FireDB_GUserQuery = collectionGroup(FireDB, GoogleCollectionName);
+// --------- TaskList Collection --------- //
+export const FireDB_TaskListCollection = collection(FireDB, 'TaskList');
+
+export const FireDB_TaskListQuery = collectionGroup(FireDB, 'TaskList');

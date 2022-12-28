@@ -4,16 +4,18 @@ import TaskCard from './TaskCard';
 import { TaskContext } from '../Context/TaskContext';
 
 function TaskList() {
-  const { tasks, Theme } = React.useContext(TaskContext);
+  // ----------------- INICIALIZANDO LOS HOOKS ----------------- //
+  const { Tasks, Theme } = React.useContext(TaskContext);
 
-  if (tasks.length === 0)
+  // ------------ RETURN COMPONENTS ------------ //
+  if (Tasks.get.length === 0)
     return (
       <span className={`EmptyTaskList ${Theme.get}`}>No hay tareas aun!</span>
     );
 
   return (
     <div className={`TaskListBox`}>
-      {tasks.map((task: taskType) => (
+      {Tasks.get.map((task: taskType) => (
         <TaskCard key={task.id} task={task} />
       ))}
     </div>

@@ -1,14 +1,15 @@
 import React from 'react';
-import { taskType } from '../types';
 import { TaskContext } from '../Context/TaskContext';
-import { uuidv4 } from '@firebase/util';
+import { createTask } from '../data/TasksFunctions';
 
 function TaskForm() {
-  const { createTask, Theme } = React.useContext(TaskContext);
+  // ----------------- INICIALIZANDO LOS HOOKS ----------------- //
+  const { Theme, GoogleUser } = React.useContext(TaskContext);
 
   const TaskInitValues = { title: '', description: '' };
   const [taskFormValues, setTaskFormValues] = React.useState(TaskInitValues);
 
+  // ----------------- HANDLE EVENTS ----------------- //
   const handleOnChange = (evento: React.ChangeEvent) => {
     const { name, value } = evento.target as
       | HTMLInputElement
@@ -19,17 +20,21 @@ function TaskForm() {
 
   const handleSubmit = (evento: React.FormEvent) => {
     evento.preventDefault();
+    if (GoogleUser.get === undefined) {
+      alert('No Has Iniciado Sesion con tu cuenta de Google!');
+      return;
+    }
 
     if (taskFormValues.title == '' || taskFormValues.description == '') {
       alert('No has Agregado un Título o una descripción a la tarea!');
       return;
     }
-    const id = uuidv4();
 
     createTask(taskFormValues.title, taskFormValues.description);
     setTaskFormValues({ title: '', description: '' });
   };
 
+  // ----------------- RETURN COMPONENTS ----------------- //
   return (
     <form onSubmit={handleSubmit}>
       <input
