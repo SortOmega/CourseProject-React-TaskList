@@ -1,12 +1,12 @@
-# PROYECTO REACT TASKLiST CON TYPESCRIPT
+# REACT TASKLIST & TYPESCRIPT
 
-## Descripción
+## Descripción / Description
 
-# _ES:_
+### _ES:_
 
 Aplicación web sobre la de creación y eliminación de Tareas almacenados en una lista, todo ello usando la librería de React de npmjs. El proyecto es basado en el curso del Youtuber "Fazt", pero usando Typescript y SASS.
 
-# _EN:_
+### _EN:_
 
 Web app for creating and deleting tasks from a Task List, mainly using the React Library from npmjs. This project is based from the React course by "Fazt" the youtuber, but with Typescript and SASS.
 
@@ -18,14 +18,18 @@ Web app for creating and deleting tasks from a Task List, mainly using the React
 
 - ✅ react
 - ✅ react-dom
+- ✅ jwt-decode
 - ✅ firebase
+- ✅ axios
 
 ### Dependencias de Desarrollo Usados / Dev-Dependencies Used
 
 - ✅ typescript
 - ✅ sass
+- ✅ prettier
 - ✅ @types/react
 - ✅ @types/react-dom
+- ✅ @types/google.accounts
 
 ## Proceso de instalacion / Installation Process
 
@@ -85,3 +89,13 @@ npm run sass
 
 - Curso de React.js: [Fazt](https://www.youtube.com/watch?v=rLoWMU4L_qE)
 - Repositorio fuente basado del curso y del proyecto: [FaztWeb](https://github.com/FaztWeb/react-tasks-example)
+
+## Screenshots
+
+![](screenshots/screenshot01.png?raw=true 'TaskList App - LightMode')
+
+![](screenshots/screenshot02.png?raw=true 'TaskList App - DarkMode')
+
+![](screenshots/screenshot03.png?raw=true 'TaskList App - Logged In with Google')
+
+![](screenshots/screenshot04.jpg?raw=true 'TaskList App - On phone')

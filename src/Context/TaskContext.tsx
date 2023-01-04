@@ -28,7 +28,7 @@ type TaskContextType = {
 //requerido en typescript --CREAR EL CONTEXT CON SUS RESPECTIVOS VALORES A EXPORTAR
 export const TaskContext = React.createContext<TaskContextType>(null!);
 
-//DECLARAR EL ELEMENTO CONTEXT JSX --------------------------------------------------------------------------
+// ------------------------------------- DECLARAR EL ELEMENTO CONTEXT JSX ------------------------------------- //
 export function TaskContextProvider({ children }: ReactChildren) {
   // ----------------- INICIALIZANDO LOS HOOKS ----------------- //
   const [usuario, setUsuario] = React.useState<GoogleUserType | undefined>(
@@ -81,7 +81,7 @@ export function TaskContextProvider({ children }: ReactChildren) {
     google.accounts.id.prompt();
   }
 
-  // FUNCION PARA OBTENER TAREAS DE TASKLIST
+  // ----------------- FUNCION PARA OBTENER TAREAS DE TASKLIST ----------------- //
 
   React.useEffect(() => {
     if (GoogleUser.get === undefined) {
@@ -89,7 +89,7 @@ export function TaskContextProvider({ children }: ReactChildren) {
     }
   }, []);
 
-  // DEVUELVE LOS VALORES SELECCIONADOS DEL CONTEXTO
+  // ----------------- DEVUELVE LOS VALORES SELECCIONADOS DEL CONTEXTO ----------------- //
   const TaskContextValues: TaskContextType = {
     Tasks,
     Theme,

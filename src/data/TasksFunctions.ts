@@ -8,7 +8,9 @@ import {
 } from './FirebaseDB';
 
 // --------------------------- FUNCIONES PARA COLECCION DE TASKLIST --------------------------- //
+//async function checkGoogleUser(subId: string) {}
 
+//async function deleteGoogleUser(subId: string) {}
 // FUNCION PARA AGREGAR USUARIOS DEL GoogleUsers
 export async function newGoogleUser(subId: string, email: string) {
   try {
